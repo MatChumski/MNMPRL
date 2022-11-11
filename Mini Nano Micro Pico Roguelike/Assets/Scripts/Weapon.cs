@@ -13,6 +13,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float attackCooldown;
     [SerializeField] private float attackTime;
 
+    [SerializeField][Range(0,2)] private float attackSpeed;
+
     public int damage;
     public bool attacking;
 
@@ -37,6 +39,7 @@ public class Weapon : MonoBehaviour
                 transform.rotation = circularPointer.transform.rotation;
 
                 // Plays the animation
+                animator.speed = attackSpeed;
                 animator.Play("Base Layer.Weapon_Attack");
                 attacking = true;
 
