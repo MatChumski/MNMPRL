@@ -14,17 +14,23 @@ public class WeaponItem : MonoBehaviour
     public float speed;
     public float damage;
     public string effect;
+    public float attackTime;
 
     // Start is called before the first frame update
     void Start()
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        //SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
-        int randomRarity = Random.Range(0, spriteList.Count);
+        //int randomRarity = Random.Range(0, spriteList.Count);
 
-        spriteRenderer.sprite = spriteList[randomRarity];
-        rarity = rarityList[randomRarity];
-        damage = damageList[randomRarity];
+        //spriteRenderer.sprite = spriteList[randomRarity];
+        //rarity = rarityList[randomRarity];
+        //damage = damageList[randomRarity];
+    }
+
+    void SetRandomProperties()
+    {
+        
     }
 
     // Update is called once per frame
