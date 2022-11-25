@@ -36,7 +36,15 @@ public class PlayerInteraction : MonoBehaviour
 
                         // Create a new replacement item before grabbing the previous one
 
-                        itemWeaponSpawner.CloneItemWeapon(touchingItem.transform.position, weapon.type, weapon.rarity);
+                        if (weapon.type == "Stick")
+                        {
+                            Instantiate(weapon);
+                            weapon.transform.position = weaponItem.transform.position;
+                        }
+                        else
+                        {
+                            itemWeaponSpawner.CloneItemWeapon(touchingItem.transform.position, weapon.type, weapon.rarity);
+                        }
                         
                         // Replacing player's weapon properties with the item's
 

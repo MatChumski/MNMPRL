@@ -21,6 +21,33 @@ public class ItemWeaponSpawner : MonoBehaviour
 
     }
 
+    public void CreateRandomWeapon(Vector3 spawnPos, float spawnOffsetX, float spawnOffsetY)
+    {
+        List<GameObject> itemList = new List<GameObject>()
+        {
+            sword,
+            dagger,
+            greataxe,
+            handaxe,
+            mace,
+            bow,
+            wand
+        };
+
+        GameObject item = Instantiate(itemList[Random.Range(0, itemList.Count)]);
+
+        WeaponItem newWeapon = item.GetComponent<WeaponItem>();
+
+        int rarity = Random.Range(0, newWeapon.rarityList.Count);
+
+        newWeapon.rarity = newWeapon.rarityList[rarity];
+        newWeapon.damage = newWeapon.damageList[rarity];
+        newWeapon.GetComponent<SpriteRenderer>().sprite = newWeapon.spriteList[rarity];
+
+        item.transform.position = new Vector3(spawnPos.x + spawnOffsetX, spawnPos.y + spawnOffsetY);
+
+    }
+
     public void CloneItemWeapon(Vector3 position, string type, string rarity)
     {
         GameObject spawning;

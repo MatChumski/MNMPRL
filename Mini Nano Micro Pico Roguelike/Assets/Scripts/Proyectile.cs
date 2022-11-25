@@ -27,7 +27,8 @@ public class Proyectile : MonoBehaviour
         if (timeAlive < lifetime && resistance > 0)
         {
             timeAlive += Time.deltaTime;
-        } else
+        }
+        else
         {
             Destroy(gameObject);
         }

@@ -26,8 +26,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8628755227674946610}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.63, y: -4, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -70,10 +70,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2036819301
+  m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3952826654900250114, guid: 51418cfa35b4de840b78a374c0b5ee16, type: 3}
+  m_Sprite: {fileID: -2306737244110553129, guid: 51418cfa35b4de840b78a374c0b5ee16, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -109,9 +109,9 @@ MonoBehaviour:
   - 25
   - 40
   type: Mace
-  rarity: 
+  rarity: Diamond
   speed: 0.7
-  damage: 0
+  damage: 40
   effect: Stun
   attackTime: 0.5
 --- !u!61 &8628755227674946614

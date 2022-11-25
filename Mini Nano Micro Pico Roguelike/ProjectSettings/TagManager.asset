@@ -8,6 +8,8 @@ TagManager:
   - ItemWeapon
   - ItemPicker
   - PlayerProyectile
+  - Wall
+  - EnemyWeapon
   layers:
   - Default
   - TransparentFX
@@ -44,6 +46,21 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: TileGround
+    uniqueID: 843351645
+    locked: 0
+  - name: TileWalls
+    uniqueID: 2581139119
+    locked: 0
+  - name: TileWater
+    uniqueID: 1567077971
+    locked: 0
+  - name: Props
+    uniqueID: 3701317441
+    locked: 0
+  - name: Chars
+    uniqueID: 2258147995
     locked: 0
   - name: Proyectiles
     uniqueID: 3915251233

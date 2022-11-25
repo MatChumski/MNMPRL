@@ -9,22 +9,50 @@ public class EnemyChase : MonoBehaviour
     [SerializeField] float speed;
 
     [SerializeField] public float distance;
+    [SerializeField] private float chaseDistance;
+
+    [SerializeField] private bool chase;
+
+    [SerializeField] Animator animator;
+
+    public bool active;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        animator = GetComponent<Animator>();
+        active = false;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         distance = Vector2.Distance(transform.position, player.transform.position);
         
         //Vector2 direction = player.transform.position - transform.position;
-        if (distance < 20)
+        if (distance < chaseDistance && active)
         {
-            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
+            animator.SetFloat("Speed", Random.Range(1, 10));
+
+            if (chase)
+            {
+                transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, Mathf.Abs(speed) * Time.deltaTime);
+            }
+            else
+            {
+                float addY = player.transform.position.y > transform.position.y ? -distance : distance;
+                float addX = player.transform.position.x > transform.position.x ? -distance : distance;
+
+                transform.position = Vector2.MoveTowards(
+                    this.transform.position, 
+                    new Vector3 (transform.position.x + addX, transform.position.y + addY, transform.position.z), 
+                    Mathf.Abs(speed) * Time.deltaTime);
+            }
+        }
+        else
+        {
+            animator.SetFloat("Speed", 0f);
         }
         
     }
