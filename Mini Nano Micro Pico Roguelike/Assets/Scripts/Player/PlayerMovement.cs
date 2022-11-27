@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody2D rb;
 
+    public GameHandler gameHandler;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,10 +28,13 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Movement
+        if (gameHandler.gameStatus == "play")
+        {
+            // Movement
 
-        movement.x = Input.GetAxisRaw("Horizontal") * speed;
-        movement.y = Input.GetAxisRaw("Vertical") * speed;
+            movement.x = Input.GetAxisRaw("Horizontal") * speed;
+            movement.y = Input.GetAxisRaw("Vertical") * speed;
+        }
     }
 
     void FixedUpdate()

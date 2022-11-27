@@ -16,44 +16,50 @@ public class EnemyChase : MonoBehaviour
     [SerializeField] Animator animator;
 
     public bool active;
+    public bool chasing;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
         animator = GetComponent<Animator>();
-        active = false;
+        //active = false;
+        chasing = false;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        distance = Vector2.Distance(transform.position, player.transform.position);
-        
-        //Vector2 direction = player.transform.position - transform.position;
-        if (distance < chaseDistance && active)
+        if (player != null)
         {
-            animator.SetFloat("Speed", Random.Range(1, 10));
+            distance = Vector2.Distance(transform.position, player.transform.position);
 
-            if (chase)
+            //Vector2 direction = player.transform.position - transform.position;
+            if (distance < chaseDistance && active)
             {
-                transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, Mathf.Abs(speed) * Time.deltaTime);
+                chasing = true;
+                animator.SetFloat("Speed", Random.Range(1, 10));
+
+                if (chase)
+                {
+                    transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, Mathf.Abs(speed) * Time.deltaTime);
+                }
+                else
+                {
+                    float addY = player.transform.position.y > transform.position.y ? -distance : distance;
+                    float addX = player.transform.position.x > transform.position.x ? -distance : distance;
+
+                    transform.position = Vector2.MoveTowards(
+                        this.transform.position,
+                        new Vector3(transform.position.x + addX, transform.position.y + addY, transform.position.z),
+                        Mathf.Abs(speed) * Time.deltaTime);
+                }
             }
             else
             {
-                float addY = player.transform.position.y > transform.position.y ? -distance : distance;
-                float addX = player.transform.position.x > transform.position.x ? -distance : distance;
-
-                transform.position = Vector2.MoveTowards(
-                    this.transform.position, 
-                    new Vector3 (transform.position.x + addX, transform.position.y + addY, transform.position.z), 
-                    Mathf.Abs(speed) * Time.deltaTime);
+                animator.SetFloat("Speed", 0f);
+                chasing = false;
             }
         }
-        else
-        {
-            animator.SetFloat("Speed", 0f);
-        }
-        
     }
 }

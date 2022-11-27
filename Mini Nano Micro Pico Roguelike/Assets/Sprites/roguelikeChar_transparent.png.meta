@@ -1309,7 +1309,7 @@ TextureImporter:
     second: roguelikeChar_transparent_434
   - first:
       213: 2045826358960162204
-    second: roguelikeChar_transparent_435
+    second: biggeraxe
   - first:
       213: 4724577761581569347
     second: roguelikeChar_transparent_436
@@ -10582,7 +10582,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: roguelikeChar_transparent_435
+      name: biggeraxe
       rect:
         serializedVersion: 2
         x: 868

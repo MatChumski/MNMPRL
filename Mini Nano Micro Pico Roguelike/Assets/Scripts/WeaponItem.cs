@@ -15,6 +15,7 @@ public class WeaponItem : MonoBehaviour
     public float damage;
     public string effect;
     public float attackTime;
+    public float energyConsumption;
 
     // Start is called before the first frame update
     void Start()

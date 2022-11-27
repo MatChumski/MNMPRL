@@ -54,6 +54,7 @@ public class PlayerInteraction : MonoBehaviour
                         weapon.effect = weaponItem.effect;
                         weapon.type = weaponItem.type;
                         weapon.attackTime = weaponItem.attackTime;
+                        weapon.energyConsumption = weaponItem.energyConsumption;
 
                         playerWeapon.GetComponent<SpriteRenderer>().sprite = touchingItem.GetComponent<SpriteRenderer>().sprite;
 

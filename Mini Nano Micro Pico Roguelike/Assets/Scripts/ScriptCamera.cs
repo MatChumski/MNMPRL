@@ -12,12 +12,15 @@ public class ScriptCamera : MonoBehaviour
     {
         player = GameObject.Find("Player");
 
-        transform.position = new Vector3(player.transform.position.x, 0, transform.position.z);
+        transform.position = new Vector3(player.transform.position.x, -0.5f, transform.position.z);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
+        if (player != null)
+        {
+            transform.position = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
+        }
     }
 }

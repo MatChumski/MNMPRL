@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UIElements;
 
 public class Weapon : MonoBehaviour
@@ -13,6 +14,18 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float attackCooldown;
     [SerializeField] private GameObject arrow;
     [SerializeField] private GameObject orb;
+
+    public GameHandler gameHandler;
+
+    public Player player;
+    public float energyConsumption;
+
+    public AudioSource weaponAudio;
+    public AudioClip shootClip;
+    public AudioClip magicClip;
+    public AudioClip failClip;
+
+    public BoxCollider2D boxCollider;
 
     public float attackTime;
     public string type;
@@ -27,77 +40,94 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         pointer = GameObject.Find("Pointer");
+        player = GameObject.Find("Player").GetComponent<Player>();
         circularPointer = GameObject.Find("Circular Pointer");
+
+        boxCollider = gameObject.GetComponent<BoxCollider2D>();
+        boxCollider.enabled = false;
+
         //attackTime = 0.3f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (gameHandler.gameStatus == "play")
         {
-            if (attackCooldown >= attackTime)
+            if (Input.GetMouseButtonDown(0))
             {
-                // Moves the weapon and rotates it according to the pointer
-                transform.position = pointer.transform.position;
-                transform.rotation = circularPointer.transform.rotation;
-
-
-
-                if (type == "Wand" || type == "Bow")
+                if (attackCooldown >= attackTime)
                 {
-                    GameObject newProyectile;
+                    // Moves the weapon and rotates it according to the pointer
+                    transform.position = pointer.transform.position;
+                    transform.rotation = circularPointer.transform.rotation;
 
-                    if (type == "Wand")
+                    player.UpdateEnergy(player.energy - energyConsumption);
+
+                    boxCollider.enabled = true;
+
+                    if (type == "Wand" || type == "Bow")
                     {
-                        newProyectile = Instantiate(orb);
-                    } else
+                        weaponAudio.clip = failClip;
+
+                        if (!player.isDebuff)
+                        {
+                            GameObject newProyectile;
+
+                            if (type == "Wand")
+                            {
+                                newProyectile = Instantiate(orb);
+                                weaponAudio.clip = magicClip;
+                            }
+                            else
+                            {
+                                newProyectile = Instantiate(arrow);
+                                weaponAudio.clip = shootClip;
+                            }
+
+                            newProyectile.transform.position = pointer.transform.position;
+                            newProyectile.transform.rotation = circularPointer.transform.rotation;
+                            newProyectile.transform.Rotate(new Vector3(0, 0, -90));
+
+                            newProyectile.GetComponent<Proyectile>().damage = damage;
+                            newProyectile.GetComponent<Proyectile>().speed = speed;
+                        }
+                        weaponAudio.Play();
+
+                        animator.speed = 1;
+                    }
+                    else
                     {
-                        newProyectile = Instantiate(arrow);
+                        animator.speed = !player.isDebuff ? speed : speed * 0.65f;
                     }
 
-                    newProyectile.transform.position = pointer.transform.position;
-                    newProyectile.transform.rotation = circularPointer.transform.rotation;
-                    newProyectile.transform.Rotate(new Vector3(0, 0, -90));
 
-                    newProyectile.GetComponent<Proyectile>().damage = damage;
-                    newProyectile.GetComponent<Proyectile>().speed = speed;
+                    // Plays the animation
+                    animator.Play("Base Layer.Weapon_Attack");
+                    attacking = true;
+                    attackCooldown = !player.isDebuff ? 0 : -0.5f;
 
-                    animator.speed = 1;
-                } else
+
+                }
+            }
+            else
+            {
+                if (attackCooldown < attackTime)
                 {
-                    animator.speed = speed;
+                    attackCooldown += Time.deltaTime;
                 }
 
-                
-
-                // Plays the animation
-                animator.Play("Base Layer.Weapon_Attack");
-                attacking = true;
-                attackCooldown = 0;
-
-
-            }
-        } 
-        else
-        {
-            if (attackCooldown < attackTime)
-            {
-                attackCooldown += Time.deltaTime;
-            }
-
-            // If the animation time was completed, the weapon
-            // returns to its original position
-            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
-            {
-                attacking = false;
-                transform.SetPositionAndRotation(
-                    transform.parent.gameObject.transform.position,
-                    transform.rotation = new Quaternion(0, 0, 0, 0));
+                // If the animation time was completed, the weapon
+                // returns to its original position
+                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+                {
+                    attacking = false;
+                    boxCollider.enabled = false;
+                    transform.SetPositionAndRotation(
+                        transform.parent.gameObject.transform.position,
+                        transform.rotation = new Quaternion(0, 0, 0, 0));
+                }
             }
         }
-
-
-
     }
 }

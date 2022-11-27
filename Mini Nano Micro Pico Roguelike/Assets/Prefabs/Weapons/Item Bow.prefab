@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2036819301
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -7412498243864045708, guid: 51418cfa35b4de840b78a374c0b5ee16, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -105,15 +105,16 @@ MonoBehaviour:
   - Iron
   - Diamond
   damageList:
-  - 10
+  - 12
   - 15
-  - 25
+  - 18
   type: Bow
   rarity: Iron
   speed: 10
   damage: 15
   effect: None
   attackTime: 0.4
+  energyConsumption: 10
 --- !u!61 &6665755529918584321
 BoxCollider2D:
   m_ObjectHideFlags: 0

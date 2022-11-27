@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2036819301
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -8906169867577768491, guid: 51418cfa35b4de840b78a374c0b5ee16, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -108,15 +108,16 @@ MonoBehaviour:
   - Sapphire
   damageList:
   - 15
-  - 20
+  - 18
   - 25
-  - 35
+  - 30
   type: Wand
   rarity: Jade
   speed: 6
   damage: 25
   effect: 
-  attackTime: 1.5
+  attackTime: 2
+  energyConsumption: 25
 --- !u!61 &3017601897954131080
 BoxCollider2D:
   m_ObjectHideFlags: 0
